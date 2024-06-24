@@ -1,6 +1,6 @@
 package com.dendyramdhan.productrabbitmq.receiver.controller;
 
-import com.dendyramdhan.productrabbitmq.receiver.entity.Product;
+import com.dendyramdhan.productrabbitmq.common.entity.Product;
 import com.dendyramdhan.productrabbitmq.receiver.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

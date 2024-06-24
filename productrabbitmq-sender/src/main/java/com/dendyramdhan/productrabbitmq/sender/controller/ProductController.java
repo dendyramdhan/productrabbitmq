@@ -1,8 +1,9 @@
 package com.dendyramdhan.productrabbitmq.sender.controller;
 
-import com.dendyramdhan.productrabbitmq.sender.entity.Product;
+import com.dendyramdhan.productrabbitmq.common.entity.Product;
 import com.dendyramdhan.productrabbitmq.sender.service.ProductSenderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -25,9 +26,9 @@ public class ProductController {
             @ApiResponse(responseCode = "400", description = "Invalid input")
     })
     @PostMapping
-    public Product createProduct(@RequestBody Product product) {
+    public ResponseEntity<?> createProduct(@RequestBody Product product) {
         productSenderService.send("CREATE", product);
-        return product;
+        return ResponseEntity.ok().build();
     }
 
     @Operation(summary = "Update an existing product")
@@ -36,10 +37,10 @@ public class ProductController {
             @ApiResponse(responseCode = "404", description = "Product not found")
     })
     @PutMapping("/{id}")
-    public Product updateProduct(@PathVariable Long id, @RequestBody Product product) {
+    public ResponseEntity<?> updateProduct(@PathVariable Long id, @RequestBody Product product) {
         product.setId(id);
         productSenderService.send("UPDATE", product);
-        return product;
+        return ResponseEntity.ok().build();
     }
 
     @Operation(summary = "Delete a product")
@@ -48,8 +49,8 @@ public class ProductController {
             @ApiResponse(responseCode = "404", description = "Product not found")
     })
     @DeleteMapping("/{id}")
-    public void deleteProduct(@PathVariable Long id) {
-        productSenderService.send("DELETE", new Product(id, null, null, null));
+    public ResponseEntity<?> deleteProduct(@PathVariable Long id) {
+        productSenderService.send("DELETE", new Product(id, null, null, 0));
+        return ResponseEntity.ok().build();
     }
 }
-

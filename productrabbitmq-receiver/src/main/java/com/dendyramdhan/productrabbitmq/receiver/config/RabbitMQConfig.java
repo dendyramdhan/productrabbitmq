@@ -1,6 +1,7 @@
 package com.dendyramdhan.productrabbitmq.receiver.config;
 
 import com.dendyramdhan.productrabbitmq.receiver.service.ProductListenerService;
+import org.springframework.amqp.core.AcknowledgeMode;
 import org.springframework.amqp.core.Queue;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,6 +27,7 @@ public class RabbitMQConfig {
         container.setConnectionFactory(connectionFactory);
         container.setQueueNames("product_queue");
         container.setMessageListener(listenerAdapter);
+        container.setAcknowledgeMode(AcknowledgeMode.AUTO);  // Ensure auto acknowledgment
         return container;
     }
 
@@ -42,4 +44,3 @@ public class RabbitMQConfig {
         return new Jackson2JsonMessageConverter();
     }
 }
-

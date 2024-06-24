@@ -20,8 +20,8 @@ services:
   
   sender:
     build:
-      context: ./productrabbitmq-sender
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: productrabbitmq-sender/Dockerfile
     ports:
       - "8081:8081"
     environment:
@@ -34,8 +34,8 @@ services:
 
   receiver:
     build:
-      context: ./productrabbitmq-receiver
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: productrabbitmq-receiver/Dockerfile
     ports:
       - "8082:8082"
     environment:
