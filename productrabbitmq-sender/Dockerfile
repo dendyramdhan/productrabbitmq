@@ -10,5 +10,7 @@ COPY target/productrabbitmq-sender-0.0.1-SNAPSHOT.jar app.jar
 # Expose the port on which the app runs
 EXPOSE 8081
 
+RUN apk add --no-cache curl net-tools
+
 # Command to run the jar file
 ENTRYPOINT ["java", "-jar", "app.jar"]
